@@ -208,6 +208,10 @@ IpsoExtra <- function(y, x = NULL, ensureIntercept = TRUE, returnParts = FALSE, 
       eSim <- yNew - xQ %*% (t(xQ) %*% yNew)
     }
     eSimQ <- GenQR(eSim, findR = FALSE, makeunique = TRUE)
+    if(get0("no_scale_in_SuppressDec",ifnotfound = FALSE)){
+      eSimQ <- eSim
+      eQRR <- diag(ncoly)
+    }
     if (nRep == 1) 
       yRes <- eSimQ %*% eQRR 
     else {
